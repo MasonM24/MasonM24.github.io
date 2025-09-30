@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mason Maile — Engineering Portfolio</title>
+  <meta name="description" content="Single-file portfolio to showcase engineering projects, skills, and experience." />
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="Engineering Portfolio" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Projects, skills, and contact — single-file HTML." />
+  <meta property="og:image" content="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><rect width='100%' height='100%' fill='%230a0a0a'/><text x='50%' y='52%' font-family='monospace' font-size='64' fill='white' text-anchor='middle'>Engineering Portfolio</text></svg>">
+  <style>
+    :root{
+      --bg:#0b0c10;--surface:#111318;--surface-2:#171a21;--text:#e6edf3;--muted:#a9b1ba;--brand:#8A1C1C;--brand-2:#c23b3b;--ok:#2fbf71;--warn:#f0b429;--err:#e5534b;--ring:0 0 0 3px color-mix(in hsl, var(--brand) 35%, transparent);--radius:16px;--shadow:0 1px 1px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.35);--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;--sans:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
+    @media (prefers-color-scheme: light){:root{--bg:#ffffff;--surface:#ffffff;--surface-2:#f2f4f8;--text:#0b0c10;--muted:#475569;--brand:#8A1C1C;--brand-2:#b93a3a;--shadow:0 1px 1px rgba(0,0,0,.06), 0 10px 30px rgba(0,0,0,.12)}}
+    html,body{height:100%}*{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .nav{position:sticky;top:0;z-index:50;background:color-mix(in hsl, var(--surface), transparent 20%);backdrop-filter: blur(8px);border-bottom:1px solid color-mix(in hsl, var(--text) 8%, transparent)}
+    .nav-inner{display:flex;align-items:center;gap:16px;justify-content:space-between;padding:14px 24px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.3px}
+    .logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;box-shadow:var(--shadow)}
+    .logo svg{filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+    .navlinks{display:flex;gap:18px;flex-wrap:wrap}
+    .avatar{
+  width:176px; height:176px; border-radius:999px;
+  object-fit:cover; object-position:center;
+  display:block;                /* << */
+  margin:12px auto 20px;        /* << centers horizontally */
+  border:1px solid color-mix(in hsl, var(--text) 12%, transparent);
+  box-shadow: var(--shadow);
+}
+.profile-name{
+  margin:0; text-align:center;
+}
+.divider{
+  border:0;
+  height:1px;
+  background: color-mix(in hsl, var(--text) 14%, transparent);
+  margin:12px 0 16px;
+}
+
+    .chip{padding:8px 12px;border-radius:999px;background:var(--surface-2);border:1px solid color-mix(in hsl, var(--text) 8%, transparent)}
+    .chip:hover{transform:translateY(-1px);transition:.15s ease;background:color-mix(in hsl, var(--surface-2), var(--brand) 8%)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:var(--brand);border:1px solid color-mix(in hsl, var(--brand) 40%, black);box-shadow:var(--shadow);font-weight:600}
+    .btn:hover{background:var(--brand-2)}
+    .ghost{background:transparent;border:1px solid color-mix(in hsl, var(--text) 14%, transparent)}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch;padding:48px 24px}
+    .hero > .card {height: 100%; display: flex; flex-direction: column;}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+    .card{background:var(--surface);border:1px solid color-mix(in hsl, var(--text) 8%, transparent);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .p-24{padding:24px}
+    h1{font-size:clamp(28px,3.2vw,44px);line-height:1.15;margin:.2em 0}
+    h2{font-size:clamp(22px,2.4vw,32px);margin:8px 0 12px}
+    h3{font-size:clamp(28px,3.2vw,36px);line-height:1.15;margin:.2em 0}
+    p{color:var(--muted)}.muted{color:var(--muted)}
+    .grid{display:grid;gap:16px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:1000px){.grid.cols-3{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:700px){.grid.cols-3,.grid.cols-2{grid-template-columns:1fr}}
+    .tag{font:500 12px/1 var(--sans);padding:7px 10px;border:1px solid color-mix(in hsl, var(--text) 12%, transparent);border-radius:999px;background:var(--surface-2);white-space:nowrap}
+    .badge{font:600 11px var(--mono);letter-spacing:.3px;padding:4px 8px;border-radius:6px;background:color-mix(in hsl, var(--brand) 16%, transparent);border:1px solid color-mix(in hsl, var(--brand) 40%, transparent)}
+    .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .spaced{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .project-card{display:flex;flex-direction:column;gap:14px}
+    /* CENTER the project headings/links on cards */
+    .project-card .spaced{
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .project-card .spaced > div{ text-align:center; }
+    .project-card h3{ text-align:center; }
+    .project-card p.muted{ text-align:left; }
+    .project-card .project-links{ justify-content: center; width: 100%; }
+    .project-card .details-btn{ display: block;width: 100%;align-self: stretch;   /* overrides your align-self:center */text-align: center;padding: 12px 18px;    /* a bit taller/longer */border-radius: 12px; }
+    .project-thumb{aspect-ratio:16/9;border-radius:12px;background:linear-gradient(135deg, color-mix(in hsl, var(--brand) 35%, var(--surface)), var(--surface-2));display:grid;place-items:center;border:1px solid color-mix(in hsl, var(--text) 10%, transparent)}
+  
+        /* desktop: show links inline; hide hamburger */
+    .menu-btn{ display:none; }
+
+    /* mobile: hide links, show hamburger; dropdown panel style */
+    @media (max-width:700px){
+      .nav-inner{ padding:10px 16px; }
+      #brandName{ font-size: clamp(14px, 5vw, 18px); }
+
+      .navlinks{ display:none; }
+      .menu-btn{ display:inline-flex; }
+
+      body.menu-open .navlinks{
+        display:flex;
+        position:fixed; top:56px; left:0; right:0;
+        flex-direction:column; gap:8px;
+        background:var(--surface);
+        border-bottom:1px solid color-mix(in hsl, var(--text) 8%, transparent);
+        padding:12px 16px; z-index:60;
+      }
+
+      .navlinks .chip, .navlinks .btn{ width:100%; justify-content:center; }
+    }
+
+    /* Attribute-driven themes (the button sets data-theme on <html>) */
+[data-theme="dark"]{
+  --bg:#0b0c10;
+  --surface:#111318;
+  --surface-2:#171a21;
+  --text:#e6edf3;
+  --muted:#a9b1ba;
+  --brand:#8A1C1C; --brand-2:#c23b3b;
+  --ok:#2fbf71; --warn:#f0b429; --err:#e5534b;
+  --ring:0 0 0 3px color-mix(in hsl, var(--brand) 35%, transparent);
+  --shadow:0 1px 1px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.35);
+}
+
+[data-theme="light"]{
+  --bg:#ffffff;
+  --surface:#ffffff;
+  --surface-2:#f2f4f8;
+  --text:#0b0c10;
+  --muted:#475569;
+  --brand:#8A1C1C; --brand-2:#b93a3a;        /* keep brand same if you like */
+  --ok:#2fbf71; --warn:#f0b429; --err:#e5534b;
+  --ring:0 0 0 3px color-mix(in hsl, var(--brand) 35%, transparent);
+  --shadow:0 1px 1px rgba(0,0,0,.06), 0 10px 30px rgba(0,0,0,.12);
+}
+
+/* Make interactive elements use current theme text color */
+.btn,
+.chip,
+.details-btn,
+.navlinks a,
+.project-links a,
+button,
+input,
+select {
+  color: var(--text);
+}
+
+/* Details button background already uses vars via .chip; ensure hover keeps contrast */
+.details-btn:hover { color: var(--text); }
+
+/* Modal: inherit theme colors explicitly */
+#projectModal { 
+  color: var(--text);              /* text in the dialog */
+  background: transparent;         /* let the inner .card style the panel */
+}
+
+#projectModal .card{
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid color-mix(in hsl, var(--text) 8%, transparent);
+}
+
+/* Body text inside modal should be the muted color in both themes */
+#modalBody p,
+#modalBody li,
+#modalBody .muted { color: var(--muted); }
+
+/* Optional: links inside modal */
+#modalBody a { color: var(--text); }
+
+/* If you want chips inside cards/headers to always read well */
+.chip { 
+  background: var(--surface-2);
+  border: 1px solid color-mix(in hsl, var(--text) 12%, transparent);
+}
+
+
+
+
+
+    /* === Modal media overrides (put this AFTER your .project-thumb rule) === */
+#projectModal .project-thumb{
+  background: transparent;
+  border: 0;
+  aspect-ratio: auto;   /* don't force 16:9 inside the modal */
+  padding: 0;
+}
+
+#projectModal #modalThumb{
+  max-height: 520px !important;  /* adjust height as you like */
+  object-fit: contain !important; /* or 'cover' if you prefer crop */
+  border: 0 !important;           /* remove border */
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+    
+    .project-links a{font-weight:600}
+    .project-links a:hover{opacity:.9;text-decoration:underline;text-underline-offset:3px}
+    .toolbar{display:flex;gap:12px;flex-wrap:wrap}
+    input[type="search"], select{background:var(--surface);border:1px solid color-mix(in hsl, var(--text) 12%, transparent);color:var(--text);padding:10px 12px;border-radius:10px;outline:none}
+    input[type="search"]:focus, select:focus{box-shadow:var(--ring)}
+    .footer{padding:48px 24px;color:var(--muted)}
+    .hidden{display:none !important}
+
+    /* ===== Modal: scrollable content area ===== */
+    #projectModal .card{max-height:85vh;display:flex;flex-direction:column}
+    #projectModal .spaced{flex:0 0 auto}
+    #modalBody{flex:1 1 auto;overflow:auto;margin-top:8px}
+    #modalBody > *{margin-bottom:12px}
+    #modalBody img,#modalBody video,#modalBody iframe{
+      width:100%;height:auto;border-radius:12px;
+      border:1px solid color-mix(in hsl, var(--text) 10%, transparent)
+    }
+    /* Optional simple gallery grid for process images */
+    #modalBody .gallery{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+    @media (max-width:700px){#modalBody .gallery{grid-template-columns:1fr}}
+
+    @media print{.nav,.toolbar,.btn,.chip,#darkToggle{display:none !important}body{background:#fff;color:#000}.card{border:1px solid #ddd}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+  <div class="nav-inner container">
+    <div class="brand">
+      <span id="brandName">Mason Maile</span>
+    </div>
+
+    <!-- 👇 ADD THIS BUTTON right here, as a sibling of .brand and .navlinks -->
+    <button id="menuBtn" class="btn ghost menu-btn" aria-expanded="false" aria-controls="navlinks">☰</button>
+
+    <!-- 👇 Add id="navlinks" to this container -->
+    <div id="navlinks" class="navlinks">
+      <a class="chip" href="#projects">Projects</a>
+      <a class="chip" href="#skills">Skills</a>
+      <a class="chip" href="#about">Mindset</a>
+      <a class="chip" href="#contact">Contact</a>
+      <button id="darkToggle" class="btn ghost" aria-pressed="false" aria-label="Toggle dark mode">🌓</button>
+    </div>
+  </div>
+</nav>
+
+
+
+
+  
+  <header class="container hero">
+    
+ 
+        
+      </div>
+    </section>
+    <aside class="card p-24">
+       <picture>
+    <!-- optional smaller, faster formats if you have them -->
+    <img
+      class="avatar"
+      src="./Mason - Headshot New.jpg"
+      alt="Mason Maile headshot"
+      width="352" height="352"
+      loading="lazy" decoding="async">
+  </picture>
+  <div></div>
+  <figcaption class="profile-name"><h3>Mason Maile</h3></figcaption>
+  <hr class="divider">
+
+
+      <div class="grid cols-2">
+        <div><div class="muted">Location</div><div id="fact-location">Milwaukee, WI</div></div>
+        <div><div class="muted">Degree</div><div id="fact-degree">B.S. Mechanical Engineering (Minor: EE)</div></div>
+        <div><div class="muted">Interests</div><div id="fact-interests">Entrepreneurship, Automation, Robotics</div></div>
+        <div><div class="muted">Status</div><div> Open to internships </div></div>
+      </div>
+      <div class="row" style="margin-top:40px">
+        <a id="resumeLink" class="btn" href="#" target="_blank" rel="noopener noreferrer">Résumé PDF</a>
+        <a id="githubLink" class="btn ghost" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a id="linkedinLink" class="btn ghost" href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </aside>
+    
+    
+    <section class="card p-24">
+      <h3> About Me </h3>
+      <p> Hello! My name is Mason Maile, and I am a junior mechanical engineering student at MSOE, also minoring in electrical engineering. People often say that when you 
+        do what you love, you never work a day in your life, and that’s exactly what I’m chasing. For me, engineering doesn’t feel like work at all, it’s something I genuinely love. Whether 
+        it’s designing, building, or problem-solving, I find myself fully immersed in the process.</p>
+
+<p>Looking ahead, my goal is to work for a company that mirrors this same passion. I want to be part of a team that creates products people notice, things that make someone stop and 
+say, “That’s cool.” More importantly, I want to help design products that actually improve the lives of their users. To me, that’s what engineering is all about: combining innovation, 
+impact, and creativity in a way that truly makes a difference.  
+</p></p>
+
+
+  </header>
+
+  <main id="projects" class="container">
+    <div class="spaced" style="margin:8px 0 12px">
+      <h2>Projects</h2>
+      <div class="toolbar" role="search">
+        <input id="search" type="search" placeholder="Search projects (e.g., robotics, CAD, Python)" />
+      </div>
+    </div>
+    <div id="projectGrid" class="grid cols-3"></div>
+  </main>
+
+  <section id="skills" class="container" style="margin-top:32px">
+    <div class="card p-24">
+      <h2>Skills</h2>
+      <div class="grid cols-3">
+        <div><div class="muted">Mechanical</div><div class="row" style="margin-top:8px"><span class="tag">SolidWorks</span><span class="tag">Blender</span><span class="tag">FEA</span><span class="tag">Flow Simulaiton</span><span class="tag">CNC Machining</span><span class="tag">Tolerancing</span></div></div>
+        <div><div class="muted">Electrical</div><div class="row" style="margin-top:8px"><span class="tag">PCB Design</span><span class="tag">Sensor Specing</span><span class="tag">Circuit Design</span><span class="tag">Micro-Controller Usage</span><span class="tag">Motor Control</span></div></div>
+        <div><div class="muted">Software</div><div class="row" style="margin-top:8px"><span class="tag">Python</span><span class="tag">MATLAB</span><span class="tag">Arduino</span><span class="tag">HTML</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="container" style="margin-top:32px">
+    <div class="card p-24">
+      <h2>My Approach To Engineering</h2>
+      <p id="aboutText">
+        <p> I’ve come to realize that the true joy of engineering lies less in the destination and more in the journey. The late nights spent problem-solving,
+         the roadblocks that force creative solutions, and the small breakthroughs along the way are what give every project its meaning. Each challenge isn’t 
+         just an obstacle to overcome but an opportunity to grow, and it’s that process that makes engineering so rewarding to me.</p>
+
+      <p>The projects above reflect this mindset. Every one of them pushed me in new ways, teaching me lessons that went far beyond the technical side. They don’t just show what I 
+        built, they capture the experiences, the problem-solving, and the growth that came with creating something meaningful.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="container" style="margin-top:32px">
+    <div class="card p-24">
+      <h2>Contact</h2>
+      <p class="muted">Email: <a id="emailLink" href="mailto:mailem@msoe.edu">mailem@msoe.edu</a> &nbsp;|&nbsp; Phone: <a id="phoneLink" href="tel:+2623749242">(262) 374-9242</a> </p>
+    </div>
+  </section>
+
+  <footer class="footer container">
+    <div class="spaced">
+      <div>© <span id="year"></span> <span id="footerName">Mason Maile</span> </div>
+      <div class="row">
+        <a href="#top" class="chip">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <dialog id="projectModal" style="border:none;border-radius:var(--radius);padding:0;max-width:860px;width:92%">
+    <div class="card p-24">
+      <div class="spaced">
+        <h2 id="modalTitle">Project</h2>
+        <button class="chip" onclick="closeModal()">Close ✕</button>
+      </div>
+
+      <!-- SCROLLABLE BODY -->
+      <div id="modalBody">
+        <div class="muted" id="modalSubtitle"></div>
+        <figure class="project-thumb" style="margin:14px 0">
+          <svg id="modalThumb" width="160" height="90" viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg"><rect width="160" height="90" rx="12" fill="#222"/></svg>
+        </figure>
+        <p id="modalDesc"></p>
+        <div class="row" id="modalTags"></div>
+        <div class="row project-links" id="modalLinks" style="margin-top:10px"></div>
+
+        <!-- Your long write-up / process HTML goes here when provided in PROJECTS[n].body -->
+        <div id="modalRich"></div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+  const PROFILE = {
+    name: "Mason Maile",
+    location: "Milwaukee, WI",
+    degree: "B.S. Mechanical Engineering (Minor: EE)",
+    interests: "Entrepreneurship, Automation, Robotics",
+    status: "Open to internships & co-ops",
+    email: "mailem@msoe.edu",
+    resumeUrl: "#",
+    github: "#",
+    linkedin: "https://www.linkedin.com/in/mason-maile-38318a294/",
+  };
+
+  const PROJECTS = [
+    {
+      id: "Motorized Office Chair - BETA",
+      title: "Motorized Office Chair - Current Project",
+      brief: "In today’s workplace, nothing is more valuable than efficiency. And what’s the biggest roadblock to efficiency, you may wonder? Walking. That’s why my friend Braden Everson and I teamed up to design an office chair capable of navigating the office at speeds of up to 18 mph.",
+      desc: "",
+      links: [
+        { label: "Crash Test Video", href: "https://youtu.be/MynxcIXWzwY" }
+      ],
+      thumbSVG: "./Chair - Front Cover Image.JPG",   // <- use a RELATIVE path
+      heroImage: "./Chair - Back Cover Image.JPG",   // ← ADD THIS LINE
+      
+      body: `
+      <h3>Braden Everson and I are hard at work on this project right now! Check back soon for an engineering processs breakdown.</h3>
+
+
+      
+    `
+   
+      },
+  
+ 
+    { id:"nerf-turret", title:"G.U.N.T.H.E.R",
+      brief:"G.U.N.T.H.E.R is an autonomous Nerf turret which uses an integrated camera system, a Rasberry Pi 5, and YoloV8 pose detection to track and defend against human threats in real time. ",
+      desc:"",
+      links:[ {label:"Demo Video",href:"https://youtu.be/hHlg6VE6QIs"}],
+      thumbSVG: "./Gunther_Main_Image.png",   // <- use a RELATIVE path
+      heroImage: "./Intro Image.png",   // ← ADD THIS LINE
+      video: { type: "youtube", id: "hHlg6VE6QIs" },
+      body: `
+        <h3>The Origin of G.U.N.T.H.E.R</h3>
+        <p> G.U.N.T.H.E.R is an autonomous Nerf turret powered by a Raspberry Pi 5 and an integrated camera system, using YOLOv8 pose detection to track and 
+          engage human targets in real time. This project was a collaborative effort between my friend Braden Everson and me: Braden developed all the software 
+          and tracking logic, while I handled the mechanical and electrical design. </p>
+
+          <p> But G.U.N.T.H.E.R didn’t start out this advanced — not even close. </p>
+
+          <p> Originally we set out to build a simple one-week prototype during finals week to prank our dormmates using a single-shot Nerf gun.
+          However, after finding a sickening amount of joy in remotely sniping our friends and fully awakening our inner child, we knew we couldn’t stop there. 
+          Turning a small prank into a fully-fledged, overengineered autonomous turret felt like the only logical next step. The images and videos below show this early stage "prototype". </p>
+          </div>
+
+          <div class="gallery">
+            <h4> V1 Prototype Build</h4>
+            <div></div>
+          <img src="./Side Profile Turret V1.png" alt="CAD v1">
+           <div></div>
+          <h4> V1 Prototype Operational Demo</h4>
+            <div></div>
+          <video controls playsinline src="./Turret V1 Firing Demo Short.MOV"></video>
+          <div></div>
+          <h4> V1 Prototype Computer Control Demo</h4>
+            <div></div>
+          <video controls playsinline src="./Night Vision Video Turret V1.MP4"></video>
+          </div>
+          
+          <p> With this orignal design being built under an aggressive one week timeline, with a priortization on funciton over form, it was undeniably rudimentry.However, I’ve learned that 
+          rapidly creating a rough minimum viable product is one of the most effective ways to capture the vision and drive decisions. So, even with its exposed servos and less then hidden wires,
+          we were able to gain valuable feedback in terms of what we liked, didnt like, and wanted to add. </p>
+
+          <p> From this early stage prototype we identified a few core things to keep - the tri-pod mounted form factor, live-feed, and optional manual control capabilities - but we also noted
+             several important shortcomings.The turret’s horizontal rotation felt sluggish,
+              the gun mount lacked rigidity, and the blaster’s slow single-fire rate severely limited engagement effectiveness. Thus, for the next iteration we knew we needed to add autonomous 
+              tracking, a faster, auto-firing Nerf gun with a higher ammo capacity, a redesigned gun mount for much greater stiffness, an increased horizontal rotation speed, and a 
+              vertical aiming axis so the system could better track the dynamic movements of a person.</p>
+
+          <p>The images below show an early stage of the development phase for prototype two. At this point we switched to a fully automatic electronic Nerf blaster and reworked the tripod-to-gun interface. 
+            Additionally, we designed a custom 3D-printed bearing assembly to take the gun’s weight and moment off the rotation mechanism, and replaced the original stepper with a high-torque 35 kg·cm servo. 
+            This design change was driven by practical limits. Without a gear reduction and running at low voltage, the stepper could not deliver the torque or positional reliability we needed. 
+            Switching to a high-torque servo gave us accurate position control and enough strength to handle the impulses and momentum from rapid rotations and direction changes. We retained a servo-based 
+            trigger mechanism, but the new blaster required a full redesign since it had separate rev and trigger inputs. To solve this, we integrated a dual-actuation servo system that could independently 
+            control both functions. The result at this stage was a much stiffer, more controllable firing platform. However, we still needed to integrate the autonomous tracking capabilites. </p>
+            
+           <div class="gallery">
+         
+          <h4> Early V2 Prototype Design</h4>
+          <div></div>
+          <img src="./Early Stage Proto 2 Full Turret.JPG" alt="CAD v1">
+          <div></div>
+          <h4> V2 Prototype Trigger Mech Right Side</h4>
+          <div></div>
+          <img src="./Proto 2 Trigger Mech 1.JPG" alt="CAD v1">
+          <div></div>
+          <h4> V2 Prototype Trigger Mech Left Side</h4>
+            <div></div>
+          <img src="./Proto 2 Trigger Mech 2.JPG" alt="CAD v1">
+          <div></div>
+          <h4> V2 Prototype Horizontal Rotation Mechanism </h4>
+            <div></div>
+          <img src="./Proto 2 Early Stage Rotation Mech.JPG" alt="CAD v1">
+          </div> 
+         
+          <p> With a solid working foundation for prototype two, we moved on to define and test the major additions we wanted. The first priority was a much larger ammunition system. Although the new 
+            blaster already held more rounds than prototype one, its 50-round capacity emptied almost instantly with the gun’s 10 rounds-per-second fire rate. So increasing storage became essential if extended operation
+            was to be achieved. My initial idea was to go the simplest route and just mount a larger hopper on top of the blaster. The image below shows that first concept.
+            </p>
+
+            <div class="gallery">
+           
+          <h4> V2 Prototype Initial Hopper Design Concept </h4>
+          <div></div>
+          <img src="./Hopper Proto 2.JPG" alt="CAD v1">
+          </div>
+
+
+            <p> However, A few immediate problems emerged with the top-mounted hopper. The added mass significantly increased the system’s rotational inertia and pushed 
+              the belt-driven servo-controlled horizontal rotation mechanism to its limits. Worse, the blaster’s feed geometry required active shaking to get rounds to drop reliably; with 
+              a larger hopper that issue was amplified and the feed would jam after just a couple seconds of firing. With these results, I went back to the drawing board.
+
+            <p> While at first I thought this issue would be rather simple to solve, it turned out to be one of the most interesitng and thought-intensive parts of the build. As I found out,
+              its actually quite difficult to move objects from a position of lower height to a higher one, and involves a lot of fluids and thermo based calculations to do so. With that said, my new idea was to
+              use a brushless motor to create a high pressure blower fan to presurize an ammunition chamber and force rounds up a tube connected to the chamber into the gun. In order to make this concept a reality,
+              , I had to first learn SolidWorks Flow Simulation and the fundamentals of high-pressure fan design. After that, I created a blower design in CAD and tweaked it according to the Flow Simulation results
+              the design until the SolidWorks flow simulations produced the output pressure required by my calculations. The images below depict this part of the process. </p>
+
+
+
+             <div class="gallery">
+             
+          <h4> V2 Prototype High Pressure Fan CAD Sketch </h4>
+            <div></div>
+          <img src="./Blower Fan Sketch.PNG" alt="CAD v1">
+          <div></div>
+          <h4> V2 Prototype High Pressure Blower Pressure Fluid Simulation </h4>
+            <div></div>
+          <img src="./Flow Simulation.JPG" alt="CAD v1">
+          <div></div>
+          <h4> V2 Prototype High Pressure Blower Velocity Fluid Simulation  </h4>
+            <div></div>
+          <img src="./Velocity Cut.PNG" alt="CAD v1">
+          </div> 
+
+          <p> With the SOLIDWORKS Flow Simulation results giving me enough confidence in the blower concept, I then got to grinding on further developing the CAD into a fully funcitoning blower design which
+          I could 3D print and place hardware into to get physical results from. The images and videos below portray this part of the process. </p>
+          
+          <div class="gallery">
+           
+          <h4> V2 Prototype Blower Fan Test Run </h4>
+            <div></div>
+          <video controls playsinline src="./Blower Proto 1.MP4"></video>
+          <div></div>
+          <h4> V2 Prototype Blower Fan System Top </h4>
+            <div></div>
+          <img src="./Blower Proto 1 Upper Image.JPG" alt="CAD v1">
+          <div></div>
+          <h4> V2 Prototype Blower Fan System Bottom </h4>
+            <div></div>
+          <img src="./Blower Ptoro Underside Image.JPG" alt="CAD v1">
+          <div></div>
+          <h4> V2 Prototype Ammunition Feeding System Test </h4>
+            <div></div>
+          <video controls playsinline src="./Blower v2 video.MOV"></video>
+          <div></div>
+          <h4> V2 Prototype Electronics Layed Out </h4>
+            <div></div>
+           <img src="./Blower Proto 2 Electronics.JPG" alt="CAD v1">
+           <div></div>
+          <h4> V2 Prototype Whole System View </h4>
+            <div></div>
+          <img src="./Blower Proto 2 Whole System.JPG" alt="CAD v1">
+          </div> 
+
+
+          <p> Having successfully designed a working ammunition-feeding system, I moved on to adding a vertical axis and reworking the stand. I again selected a 35 kg·cm servo for the vertical axis articulation because of
+          its high torque and precise position control. At the same time I began developing a basic autonomous tracking code to prove out real-time person tracking with OpenCV. For this design stage I used a Raspberry 
+          Pi Pico to handle the servos and trigger logic, and offloaded the vision processing to my PC. The decision for splitting up the processing was done so that heavy image procesing could run without slowing down the actuation of the servos. 
+          The images below show the redesign and integration process.
+          </p>
+
+
+          <div class="gallery">
+            
+          <h4> V2 Prototype Vertical Axis Belt Mechanism </h4>
+            <div></div>
+          <img src="./Vertical Axis Of Motion Image.JPG" alt="CAD v1">
+          <div></div>
+          <h4> V2 Prototype Early Stage Test </h4>
+            <div></div>
+          <video controls playsinline src="./Monster Video Proto 2.MP4"></video>
+          </div> 
+
+
+        <p> With all listed objectives completed for our second prototype, I then integrated the ammunition feeding system onto the turret and began full systems testing. The videos below demonstrate this full systems testing. Additionally, the image shows the final CAD model for this second prototype.</p>
+
+        <div class="gallery">
+          
+          <h4> V2 Prototype Full Build Test</h4>
+            <div></div>
+        <video controls playsinline src="./Full Proto 2 demo build.MOV"></video>
+        <div></div>
+          <h4> V2 Prototype Full Build Test V2 </h4>
+            <div></div>
+        <video controls playsinline src="./proto 2 full system demo.MP4"></video>
+        <div></div>
+          <h4> V2 Prototype Whole System CAD Model </h4>
+            <div></div>
+        <img src="./Turret - Proto 2 Final CAD.JPG" alt="CAD v1">
+ 
+        </div>
+          
+
+        <p> After completing full system tests of the second prototype, I felt confident I had gathered enough feedback and insights to begin the final design of G.U.N.T.H.E.R. From the lessons learned during 
+          earlier iterations, I knew the final version needed to look far more professional and visually cohesive—no more mismatched PLA colors. </p>
+
+        <p> One major issue I encountered in previous builds was the horizontal rotation system. The belt-driven setup suffered from significant slippage during fast directional changes, so I planned to replace 
+          it with a more robust and reliable mechanism. </p>
+
+        <p> Cable management was another clear area for improvement. In the earlier prototypes, exposed wiring not only looked unrefined but made troubleshooting difficult. For the final version, integrating clean, 
+          internal wiring would streamline maintenance and elevate the product’s overall presentation. </p> 
+
+        <p> Another critical upgrade involved the trigger and rev systems. The use of servos introduced noticeable lag and unnecessary complexity. To solve this, I decided to replace them with a fully 
+          electronic, relay-based trigger system for faster, more efficient actuation. </p>
+
+        <p> Finally, the existing tripod mount lacked the stability and rigidity required for consistent performance. To address this, I planned to design a new mounting platform that offered a more solid 
+          foundation. </p> 
+
+        <p> With these improvements clearly outlined, I jumped into the last phase of G.U.N.T.H.E.R by redesigning the base where the Nerf blaster was mounted. </p>
+
+        <p> To support a more robust horizontal rotation system, I researched various mechanisms before settling on a NEMA 22 stepper motor paired with a micro motorcycle chain drive. I was initially
+           wary of using a stepper motor, assuming it lacked torque. However, after digging into how stepper motors work, I found that—when paired with the right gear ratio—it could output up to 18 Nm of 
+           torque. Since my calculations showed a maximum required impulse of just 3.31 Nm, this setup was more than sufficient. </p> 
+
+        <p> Having dealt with belt slippage in earlier prototypes, I also chose the chain-and-sprocket system for its superior grip under fast, directional changes. This new base offered the strength and precision
+           I needed, setting a solid foundation for the next stage of the build. The images below portray this phase. </p> 
+          
+
+
+          <div class="gallery">
+            <h4> Test Circuit for Stepper Motor  </h4>
+            <div></div>
+          <img src="./Turret - Stepper Motor Wiring.JPG" alt="CAD v1">
+           <div></div>
+          <h4> New Base CAD Model  </h4>
+            <div></div>
+          <img src="./Turret - New Base CAD.JPG" alt="CAD v1">
+          <div></div>
+          <h4> Stepper Motor Control Test  </h4>
+            <div></div>
+          <video controls playsinline src="./Turret - Stepper Control Test.MOV"></video>
+          <div></div>
+          <h4> Horizontal Rotation Mechanism Test  </h4>
+            <div></div>
+          <video controls playsinline src="./Turret - Stepper Control Base.MOV"></video>
+          </div>
+
+
+
+          
+        <p> With the new base and horizontal rotation mechanism designed and working the next improvement I addresed was adding electronic controls to the gun. I started this by opening up the Nerf blaster, removing the manufacture's circuitry, and installing my own relays and wiring.
+          This process turned out to be one of the more intense parts of the final build as trying to figure out how electrical circuitry works without any schematic is a rather lucritive process. That said, after melting a
+          few too many dupont wires, setting off the smoke alarm, and blowing up a relay, I got the blaster rewired and the relays inserted. This process is captured in the videos and images below.
+          
+          <div class="gallery">
+            <h4> Testing Relay Trigger Control Video 1  </h4>
+            <div></div>
+          <video controls playsinline src="./Turret - Electronic Trig Test.MOV"></video>
+           <div></div>
+          <h4> Testing Relay Trigger Control Video 2  </h4>
+            <div></div>
+          <video controls playsinline src="./Turret - Relay Demo.MP4"></video>
+          </div>
+
+
+         <p> After rewiring the Nerf blaster with custom circuitry, I moved on to designing the electrical box—where I learned one of the most valuable lessons: your electrical box will 
+          always need to be larger than you think. </P>
+
+        <p> For the first version, I designed the box to fit every component with perfect precision. While this seemed ideal from a space-saving perspective, it quickly became impractical. 
+          Inevitably, new components needed to be added later, and the lack of extra room left no flexibility for upgrades or modifications. </p>
+
+        <p> Learning from that mistake, I went all out on the final version. I built the box with additional space to accommodate future expansions, integrated wire channels for cleaner 
+          routing and easier troubleshooting, made the back board a pin board allowing for modular componet placement, and included terminal blocks. The terminal blocks not only reduced the number of solder joints required but also made the system modular, 
+          allowing me to quickly add and test new components by simply plugging them in. The images below show this process, as well as the final electrical box design and instilation. </P>
+          
+
+          <div class="gallery">
+            <h4> E-Box V1 </h4>
+            <div></div>
+            <img src="./Turret - E-Box V1.JPG" alt="CAD v1">
+             <div></div>
+            <h4> E-Box V2 CAD Model </h4>
+            <div></div>
+            <img src="./Turret - Electrical Box CAD Model Final .JPG" alt="CAD v1">
+             <div></div>
+            <h4> E-Box V2 Physical Assembly </h4>
+            <div></div>
+            <img src="./Turret - Electrical Box Actual Image.JPG" alt="CAD v1">
+             <div></div>
+            <h4> E-Box V2 Internals </h4>
+            <div></div>
+            <img src="./Turret - Electrical Box Wiring.JPG" alt="CAD v1">
+
+          </div>
+
+          
+          <p> After finishing the electrical box, the only mechanical system left to design was the final ammunition feeding system. Since I had already proven the basic design with my 
+            second prototype, this step mainly involved creating a housing to integrate the blower system. Because the unit was mounted externally on the turret, I wanted to make sure the 
+            design maintained the overall aesthetic. I spent a lot of time adding details to the enclosure so it felt consistent with the rest of the build. </p>
+
+          <p> One of the biggest challenges with this design was the amount of electronics that needed to fit inside the enclosure for the blower to function. A Raspberry Pi Pico, 
+            ESC controller, LiPo battery, DC motor controller, DC motor, power terminal, and brushless motor all had to fit in the same space. This meant I had to carefully plan out 
+            space allocation and organize components in a way that kept everything functional and accessible. That said, I was really happy with the final product. The images and videos below 
+            show the final ammunition feeding system I created. <p> 
+          
+
+            <div class="gallery">
+            <h4> Final Ammunition Feeding System CAD Model </h4>
+            <div></div>
+            <img src="./Turret - Ammunition Feeding System CAD.JPG" alt="CAD v1">
+             <div></div>
+            <h4> Ammunition Feeding Enclosure 3D Printed Parts </h4>
+            <div></div>
+            <img src="./Turret - Ammunition Feeding System Parts.JPG" alt="CAD v1">
+             <div></div>
+            <h4> Internal View of Ammunition Feeding System </h4>
+            <div></div>
+            <img src="./Turret - Ammunition Feeding System Internals.JPG" alt="CAD v1">
+            <div></div>
+            <h4> Ammunition Feeding System Test  </h4>
+            <div></div>
+            <video controls playsinline src="./Turret - Ammunition Feeding Demo.MP4"></video>
+
+          </div>
+
+
+          <p> With all the mechanical systems complete, the last design challenge I had to tackle was shelling the lower metal box frame of G.U.N.T.H.E.R. This turned out to be 
+            one of the more thought-intensive parts of the project because I wanted something that looked futuristic and aesthetically pleasing, while still being lightweight and 
+            easy to fabricate. </p>
+
+          <p> I spent a good amount of time considering different approaches, but ultimately settled on a trick often used in video games to make simple geometry look more interesting: 
+            layering on lots of decals and surface details. Taking inspiration specifically from Cyberpunk 2077, I designed and laser-cut the panels in my garage, decorating them with random 
+            barcodes, safety warnings, and callouts to give the exterior a busy, detailed look. Images of this process are shown below. </p>
+            
+            
+            
+            <div class="gallery">
+            <h4> Laser Engraving Wood Panels </h4>
+            <div></div>
+            <img src="./Turret - Laser Cutting Panel.JPG" alt="CAD v1">
+             <div></div>
+            <h4> Designing Panels in Lightburn </h4>
+            <div></div>
+            <img src="./Turret - Wood Panel Design.JPG" alt="CAD v1">
+             <div></div>
+            <h4> All Laser Cut Panels Layed Out </h4>
+            <div></div>
+            <img src="./Turret - Panels Layed Out.JPG" alt="CAD v1">
+
+          </div>
+            
+          <p> Having finished designing all the mechanical and electrical systems for the the Final G.U.N.T.H.E.R build the long assembly process began. The images below show a glimpse of this process. </p>
+
+
+          <div class="gallery">
+            <h4> Assembly Stage 1 </h4>
+            <div></div>
+            <img src="./Turret - Build Stage 1.JPG" alt="CAD v1">
+             <div></div>
+            <h4> Assembly Stage 2 </h4>
+            <div></div>
+            <img src="./Turret - Assembly Stage 2.JPG" alt="CAD v1">
+             <div></div>
+            <h4> Assembly Stage 3 </h4>
+            <div></div>
+            <img src="./Turret - Assembly Stage 3.JPG" alt="CAD v1">
+            <div></div>
+            <h4> Assembly Stage 4</h4>
+            <div></div>
+            <img src="./Turret - Assembly Stage 4.JPG" alt="CAD v1">
+            <div></div>
+            <h4> Assembly Stage 5 </h4>
+            <div></div>
+            <img src="./Turret - Assembly Stage 5.JPG" alt="CAD v1">
+            <div></div>
+            <h4> Assembly Stage 6 </h4>
+            <div></div>
+            <img src="./Turret - Assembly Stage 6.JPG" alt="CAD v1">
+            <div></div>
+            <h4> Final CAD Model </h4>
+            <div></div>
+            <img src="./Turret - CAD FINAL.JPG" alt="CAD v1">
+
+          </div>
+
+              <div></div>
+
+          <h3> And thats all folks. Thats the origin story of G.U.N.T.H.E.R! </h3>
+  
+          
+          
+        
+          
+
+
+         
+      `
+    },
+
+    { id:"Print Lock", title:"Print Lock",
+      brief:"Print Lock is a biometric door unlocking system that scans my fingerprint, displays the scan on an LCD screen, and, if recognized, unlocks my dorm room using a servo mechanism. This system eliminates the need for keys and provides a convenient and secure way to access my room.",
+      desc:"",
+      links:[ {label:"Demo Video",href:"https://www.youtube.com/watch?v=euNzDkedKLY"}],
+      thumbSVG: "./Scanner - Back Image 1.JPG",   // <- use a RELATIVE path
+      heroImage: "./Scanner - Thumb Print Scane .JPG",   // ← ADD THIS LINE
+      body: `
+        <h3>Print Lock - Project Overview</h3>
+        <p>  No college student enjoys locking themselves out of their dorm. As someone who forgets their keys in their room at least once a week, I know that pain all too well. 
+          That’s why, over winter break, I decided to spend a week building a solution to this problem. </p>
+
+        <p> I created a biometric door unlocking system that scans my fingerprint, displays the scan on an LCD screen, and, if recognized, unlocks my dorm room using a servo mechanism. 
+          This system eliminates the need for keys and provides a convenient and secure way to access my room. </p>
+
+        <p> The project was not only a practical solution to a frequent inconvenience, but it also allowed me to apply my skills in embedded systems, biometric security, and mechanical 
+          actuation. It’s been a fun and rewarding experience to see this idea come to life, and it’s already made my daily life much easier!       </p> 
+
+        <h3>Print Lock - Component Break Down</h3>
+        <div></div>
+
+        <h4>SOLIDWORKS Model of Biometric Scanner with LCD Display</h4>
+        <p> This model houses the biometric fingerprint scanner and LCD display, designed with a futuristic aesthetic featuring sharp angles, geometric edges, and bold cuts. 
+          It provides a secure, ergonomic enclosure for the electronics, ensuring functionality and style. The protective shell safeguards internal components, while the red cylindrical 
+          elements add contrast and an industrial feel. This design balances durability and aesthetics, serving as the centerpiece of my biometric dorm unlocking system. </p> 
+        
+          <div class="gallery">
+          <img src="./Scanner - CAD Front View Scanner.JPG" alt="CAD v1">
+          </div>
+
+
+        <h4>Biometric Scanner Back View</h4>
+        <p> This image shows the backside of the biometric scanner. It highlights the custom insert parts designed to mount and hold the LCD and button securely in place. Cutouts were 
+          added to accommodate proper wire routing, allowing cables to pass cleanly through the long red pipe while maintaining a functional and organized layout. </p>
+
+          <div class="gallery">
+          <img src="./Scanner - Back View Model.JPG" alt="CAD v1">
+          </div>
+
+          <h4>Door-Mounted Electronics Hub for Backside of Door</h4>
+          <p> This image shows the electronics box I designed to house the Pico microcontroller, which controls the biometric scanner, servo, LCD, and LEDs. 
+            The design incorporates integrated piping to conceal wires running to the servo and the other side of the door. Staying true to a futuristic, heavy-duty aesthetic, 
+            I added reinforced sections to give the box a fortified appearance, as though it could withstand rugged conditions or even battle.</p>
+
+          <div class="gallery">
+          <img src="./Scanner - Hub Unit Model.JPG" alt="CAD v1">
+          </div>
+
+
+          <h4>Electronics Case Side View</h4>
+          <p> This side view highlights the electronics box’s bold geometric design and reinforced corners for a rugged, futuristic look. Three cylindrical ports ensure clean 
+            wire routing while adding an industrial touch. A triangular engraving on the side enhances the modern aesthetic, and the black side handles provide practicality for 
+            mounting or handling, complementing the box's fortified structure. </p> 
+
+          <div class="gallery">
+          <img src="./Scanner - Case Model.JPG" alt="CAD v1">
+          </div>
+
+          <h4>Internal View of Electric Box Base</h4>
+          <p> This image shows the inside of the base half of the electronics box. It features holes for positioning the Pico microcontroller and guide walls to securely hold the breadboard. 
+            The design also includes tabs for mounting magnets, which allow the two halves of the box to seal together seamlessly when combined, ensuring both functionality and durability. </p>
+
+          <div class="gallery">
+          <img src="./Scanner - Case Inside.JPG" alt="CAD v1">
+          </div>
+
+          <h4>Power Supply Case</h4>
+          <p> This rugged, two‐piece enclosure holds the 5 V/3 A power supply that powers the LCD and fingerprint scanner. It’s built to match the durable, futuristic look of the main 
+            electronics box and allows the power supply to be mounted in an aesthetically pleasing way. </p>
+
+          <div class="gallery">
+          <img src="./Scanner - Power Supply Case.JPG" alt="CAD v1">
+          </div>
+
+
+          <h4>Biometric Scanner Physical Assembly</h4>
+          <p> This image depicts the backside of the physical biometric scanner model which houses a button, fingerprint scanner and LCD Screen.</p> 
+
+          <div class="gallery">
+          <img src="./Scanner - Scanner ssembly.JPG" alt="CAD v1">
+          </div>
+
+
+
+        `
+
+    },
+    { id:"Custom Split Flap Display", title:"Custom Split Flap Display",
+      brief:"Inspired by old airport terminal displays, I decided to create my very own mechanical split flap display to greet people entering my dorm with custom messages.",
+      desc:"",
+      links:[ {label:"Demo Video",href:"https://youtu.be/xHJfmBt6C70"}],
+      thumbSVG: "./Split Flap - Hello Spelt Out.JPG",   // <- use a RELATIVE path
+      heroImage: "./Split Flap - Mason Spelt Out.JPG",   // ← ADD THIS LINE
+      body: `
+        <h3>Split Flap Project Overview</h3>
+
+      <p> Fascinated by the mechanical intricacies of split-flap displays—and determined to succeed after falling short in designing one during my 
+        senior year of high school—I decided to spend my freshman summer in college tackling the mechanism that had once defeated me. My goal? To create a fully 
+        functional 5-slot split-flap display that could spell my name.</p>
+
+      <p> Along the way, I faced obstacles that tested my patience and problem-solving skills. There were moments when nothing worked, and I felt like giving up. 
+        But I stuck with it, and eventually, things started to click—teaching me that progress often feels impossible until it isn’t. If you don’t push through the 
+        hard times, you’ll never experience the satisfaction of success.</p>
+
+        <h3>Split Flap Design Process</h3>
+
+        <p> Gear Driven Proto Design Idea - My original design idea for the split-flap mechanism was a gear-driven layout that tucked the stepper motor 
+          behind the main assembly to make the package more compact. In testing, however, this configuration significantly reduced the torque delivered 
+          to the drive gear and introduced noticeable slop (backlash) into the mechanism, so I ultimately abandoned it for a stiffer, more direct-drive approach. </p>
+        
+        
+          <div class="gallery">
+          <img src="./Split Flap - Gear Driven Mechanism.JPG" alt="CAD v1">
+          </div>
+
+          <p> Belt Driven Proto Design Idea - After the less then optimal results of the inital gear driven prototype I experimented with a belt driven system
+            that positioned the stepper motor behind the main assembly. This was done to create a more compact design then that offered by the bulky gear driven design.
+            However, due to the precise tension required for the belts to properly mesh with the gears, this idea was ultimately scrapped in favor of a simpler and 
+            more reliable direct-drive mechanism. </p>
+
+            <div class="gallery">
+          <img src="./SPlit Flap - Belt Driven Mechanism.JPG" alt="CAD v1">
+          </div>
+
+          <p> Final Proto (Direct Drive Mechanism) - The final mechanical mechanism I landed on was the simpelest mechanically, and it opted for
+             a direct drive mechanism which afixed the output shaft of the stepper directly to the spindel which all the split flaps were mounted to.
+             While this design wasn't as compact as the belt driven mechanism, it significantly reduced slop compared to earlier setups, allowing for a significant increase in precise position control.
+             Thus, effectivly allowing me to reliably set letters as desired. Additionally, it made use of a modular micro limit switch mounting cage design which allowed me to streamline the testing phase
+             and find the most optimal location for the micro limit switch to achieve precise homing of the split flaps. Once again allowing for reliable letter selection. </P>
+
+             <div class="gallery">
+          <img src="./Split Flap - Final Mechanism.JPG" alt="CAD v1">
+          </div>
+
+          <p> Below is a collection of images and videos of the final product. </p>
+
+           <div class="gallery">
+           <img src="./Split Flap - Internals Top View.JPG" alt="CAD v1">
+           <img src="./Split Flap - Final Front View.JPG" alt="CAD v1">
+           <img src="./Split Flap - Back Powered On.JPG" alt="CAD v1">
+           <img src="./SPlit Flap - Final CAD.JPG" alt="CAD v1">
+           <video controls playsinline src="./Split Flap - Spelling Mason.MOV"></video>
+          </div>
+             
+             
+
+
+
+
+        
+        
+        
+        
+        
+        
+        `
+
+    },
+    { id:"Robotic Arm", title:"Autonomous Robotic Arm",
+      brief:"Having nothing to do during Christmas break my freshman year of college, I decided there was no better way to pass the time then by building a robotic arm. This robotic arm was special though as it used an integrated camera and OpenCV to track the position of a ball in real time and reach out and grab it.",
+      desc:"",
+      links:[ {label:"Demo Video",href:"https://www.youtube.com/watch?v=eoVKdhKJ-rU"}],
+      thumbSVG: "./Robot Arm - Final System Image.JPG",   // <- use a RELATIVE path
+      heroImage: "./Robotic Arm - CAD Model.JPG",   // ← ADD THIS LINE
+      body: `
+      <h3>Robotic Arm Project Overview</h3>
+
+      <p> Having always wanted to design and build my own articulating robotic arm after seeing the J.A.R.V.I.S system in Iron Man 3, I started the creation of this 
+        robot over winter break thinking it would be a quick 1-month long project that might help me pick up a few new modeling techniques and sharpen up my coding 
+        skills. What has amassed has been a 2+ month long project full of highs, such as the times when the 3D printed CAD models fit together beautifully, and lows, 
+        such as the many many hours spent trying to uncover the magic that is using a camera to detect objects. However, despite the good and the bad, I've loved every
+         moment of this project and as such would like to highlight a few things I've learned along the way. </p> 
+
+         <p> 1.) My greatest take away was an understanding of the power of object detection with the OpenCV python library. Using this library, I was able to create 
+          python code that could detect the position of a ball via camera feed and calculate the up, down, left, and right movements required by 4 servos to center the
+           camera on the ball. The amount of autonomous potential a single camera and OpenCV present is befalling, and it has been a major proponent in the successes of
+            my robot so far. </p>
+
+        <p> 2.) The importance of understanding component potential before initiating design cannot be stressed enough. Having designed the first prototype around 
+          continuous rotation servos, which could only output 15kg of torque at the core, I was forced to later completely redesign the main extension arm and base as 
+          well as purchase more-powerful 35 kg non-continues servos when I realized the previously purchased components were not at all rated for the demands of my robot. 
+          A mistake I avoided later through better research and a more thorough analysis of the stresses on the components. </p> 
+    
+        <p> 3.) Accepting that a CAD design, no matter how much time, thought, or effort is put into it, will likely not be perfect on the first attempt. It is best to 
+          create rough designs then rework later on. </p>
+
+
+       <h3>Robotic Arm Design Process</h3>
+
+       <p> Having little experience with a project of this scale at the time, I wasn’t sure where to start. I decided to begin by building a manually controlled prototype to validate the core concept. 
+        The most challenging part of the design as this stage was developing the joint motor mechanism for the robotic arm. I needed a solution that was compact, offered precise angle control, 
+        and delivered high torque. To tackle this, I researched patents for existing robotic arms and ultimately designed a joint mechanism using internally housed servos connected to an 
+        internal gear ring within each joint. The images and videos below show this early prototype. </p>
+
+        <div class="gallery">
+           <img src="./Robotic Arm - Internal Joint.JPG" alt="CAD v1">
+           <video controls playsinline src="./Robotic Arm - V1 Manual Testing.MOV"></video>
+           </div>
+
+
+        <p> With this first manual control prototype giving me confidence in the general design of the joint motors and arms, I began the next phase of the project, which was looking into how to achieve autonomous tracking.
+          Having never used any object detection library befor, I was completly in the dark as to where to start. However, after aproximatly 2 days of failed youtube torturials, I landed on OpencCV. A farley user freidnly
+          object detection library which has since become my go to for all projects using object detection. </p>
+          
+          <p> Having zeroed in on the object detection library I wanted to use, I proved out a basic idea of using an Object Detection script to move servos using a robotic dog I had previously 
+            built. The video below shows this proof of concept moment. </p> 
+            
+           <div class="gallery">
+           <video controls playsinline src="./Robotic Arm - Tracking Proved Out.MOV"></video>
+           </div>
+
+          <p> With both the mechanical and code based systems proved out, I began working on integrating the autonomous tracking into the robotic arm prototype. My main focuse during this stage was optimizing the code 
+           and mechanical mechinsim as much as possible as to allow for maximum speed of tracking. The demo videos below show a few of the speed tests I ran during optimization. </p>
+
+           <div class="gallery">
+           <video controls playsinline src="./Robotic Arm - Speed Test 1.MOV"></video>
+           <video controls playsinline src="./Robotic Arm - Speed Test 2.MOV"></video>
+           </div>
+            
+            
+          
+           <p> Generaly satisfied with the operation of the robotic arm's tracking and motion, I began working on addreasing my major dislike with the arm up to this point.
+           That being that the base joint lacked an adequte amount of torque as to allow for a payload to be carried at the end effector of the arm. Additionally, this lack of torque reduced how fast the arm could extend and retract.
+           So, to address this, I redesigned the base to house 2 35kg*cm servos instead of 1 15kg*cm servo. However, this addition would introduce an unforseen complication for coding. </p>
+
+           <p> By adding a second servo into the gearbox of the robot's base joint, I now effectivly had to figure out a way to get both servos to rotate symeltansoly. On the surface this sounds 
+            rather easy as you would assume all servos of the same type rotate at the same speed and increment, but this is not the case. The slight diffrence in rotation speeds 
+            was causing grinding of the gears leading to decreased performance and failure at points. To solve this problem, I had to create a code script which used PWM to step each servo incremently in hundreds of 
+            tiny steps until the desired angle was achieved. The video below shows the successful solving of this problem.  </P> 
+
+
+            <div class="gallery">
+           <video controls playsinline src="./Robotic Arm - Synching Rotation .MOV"></video>
+           </div>
+
+           <p> With the servo synching problem solved in the base joint, and now having an adequate amount of torque for moving a payload at the end effector of the arm, I began working on designing a robotic claw to attach to the end. 
+            I knew this claw was going to need a fair amount of dextarity for grabing small objects, so I made use of six micro servos for articulating the claw joints. Additionally, to determine the relative proximity of an object 
+            in relation to the claw I integrated an ultrasonic sensor into it. This allowed for the arm to autonomously grab objects only when they were actually close enough to be grabbed. The images and videos
+             below show the design proces of this claw. </p>
+
+           <div class="gallery">
+           <video controls playsinline src="./Robotic Arm - Initial Claw Test.MOV"></video>
+           <video controls playsinline src="./Robotic Arm - Claw Articulation.MP4"></video>
+           <img src="./Robotic Arm - Claw Image 1.JPG" alt="CAD v1">
+           </div>
+
+          <p> After several iterations, I was finally satisfied with the operation of the claw and integrated it onto the robotic arm. At this point I was on the home stretch for the project and all that was left was 
+            tieing up lose ends in the code. That said, the following images show the final result of this project. </p> 
+
+
+        <div class="gallery">
+           <img src="./Robotic Arm - Front View.JPG" alt="CAD v1">
+           <img src="./Robot Arm - Final System Image.JPG" alt="CAD v1">
+           </div>
+
+
+
+
+        `
+    },
+   {
+      id: "auto-blinds",
+      title: "Automatic Blinds",
+      brief: "After recently moving into an apartment with wall-to-wall windows, my roommate Braden Everson and I built an automatic blinds system to make managing natural light easier. Using a custom app, a central control hub, and servo motors, we developed a setup that lets us remotely open or close all the blinds from anywhere in the apartment, at any time.",
+      desc: "",
+      links: [
+        { label: "Demo Video", href: "https://youtu.be/gILmVcEcuZM" }
+      ],
+      thumbSVG: "./Blinds - Demo Phone Video.gif",   // <- use a RELATIVE path
+      heroImage: "./Intro Image.png",   // ← ADD THIS LINE
+      // body: `<h3>Process</h3>...`  // OPTIONAL: add rich HTML here Having recently moved into an apartment with a wall full of windows which I like to have open during the sunrise and closed during the middle of the day to keep the apartment cool. My roomate Braden Everson and I decided to create a system that allos us to open all the winodws remtoly rather than having to manually open each blind. All via an app on our phonr or a central hub on the wall.
+    },
+  
+  ];
+
+  function $(id){return document.getElementById(id)}
+
+  function svgThumb(label){
+    const txt = encodeURIComponent(label);
+    return `data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' width='640' height='360'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%23${(getComputedStyle(document.documentElement).getPropertyValue('--brand')||'#8A1C1C').replace('#','')}'/><stop offset='100%' stop-color='%23333333'/></linearGradient></defs><rect width='100%' height='100%' rx='20' fill='url(%23g)'/><text x='50%' y='54%' font-family='monospace' font-size='32' fill='white' text-anchor='middle'>${txt}</text></svg>`;
+  }
+
+  function thumbEl(title){
+    const img = document.createElement('img');
+    img.alt = `${title} preview`;
+    img.src = svgThumb(title);
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'cover';
+    img.style.borderRadius = '12px';
+    img.style.border = '1px solid color-mix(in hsl, var(--text) 10%, transparent)';
+    return img.outerHTML;
+  }
+
+  function renderProfile(){
+    $("brandName").textContent = "Mason Maile's Engineering Portfolio";
+    $("fact-location").textContent = PROFILE.location;
+    $("fact-degree").textContent = PROFILE.degree;
+    $("fact-interests").textContent = PROFILE.interests;
+
+    $("emailLink").setAttribute('href', `mailto:${PROFILE.email}`);
+    $("emailLink").textContent = PROFILE.email;
+    $("resumeLink").setAttribute('href', PROFILE.resumeUrl || '#');
+    $("githubLink").setAttribute('href', PROFILE.github || '#');
+    $("linkedinLink").setAttribute('href', PROFILE.linkedin || '#');
+
+    $("footerName").textContent = PROFILE.name;
+    $("year").textContent = new Date().getFullYear();
+  }
+
+  function cardTemplate(p){
+    const el = document.createElement('article');
+    el.className = 'card p-24 project-card';
+    el.innerHTML = `
+      <div class="project-thumb">${
+        p.thumbSVG
+          ? `<img alt="${p.title} preview" style="width:100%;height:100%;object-fit:cover;border-radius:12px" src="${p.thumbSVG}">`
+          : thumbEl(p.title)
+      }</div>
+      <div class="spaced">
+        <div><h3 style="margin:0">${p.title}</h3></div>
+      </div>
+      <p class="muted">${p.brief||""}</p>
+      <div class="row project-links">${
+        (p.links||[]).map(l=>`<a href="${l.href}" target="_blank" rel="noopener noreferrer">${l.label} ↗</a>`).join('')
+      }</div>
+      <button class="chip details-btn" aria-label="Open project ${p.title}">Details →</button>
+    `;
+    el.querySelector('.details-btn').addEventListener('click', ()=>openModal(p));
+    return el;
+  }
+
+  function renderGrid(list){
+    $("projectGrid").innerHTML = '';
+    list.forEach(p => $("projectGrid").appendChild(cardTemplate(p)));
+    if(!list.length){ $("projectGrid").innerHTML = `<div class='muted'>No projects match your filters.</div>`; }
+  }
+
+  function applyFilters(){
+    const q = ($("search")?.value || "").trim().toLowerCase();
+    const filtered = PROJECTS.filter(p=>{
+      const hay = ((p.title||"")+" "+(p.brief||"")+" "+(p.desc||"")).toLowerCase();
+      return !q || hay.includes(q);
+    });
+    renderGrid(filtered);
+  }
+
+  function openModal(p){
+    $("modalTitle").textContent = p.title;
+
+    // Optional subtitle (leave blank if you don't want it)
+    const modalSub = $("modalSubtitle");
+    const subtitle = p.subtitle || "";
+    modalSub.textContent = subtitle;
+    modalSub.classList.toggle("hidden", !subtitle.trim());
+
+    // Media (video or image)
+    const mediaHtml = p.heroImage
+  ? `<img id="modalThumb" alt="${p.title} image"
+       style="width:100%;max-height:360px;object-fit:cover;border-radius:12px;border:1px solid color-mix(in hsl, var(--text) 10%, transparent)"
+       src="${p.heroImage}">`
+  : (p.video
+      ? (p.video.type === "youtube"
+          ? `<div id="modalThumb" style="position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;border:1px solid color-mix(in hsl, var(--text) 10%, transparent)">
+               <iframe
+                 src="https://www.youtube.com/embed/${p.video.id}"
+                 title="${p.title} demo"
+                 style="position:absolute;inset:0;width:100%;height:100%;border:0"
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                 allowfullscreen></iframe>
+             </div>`
+          : `<video id="modalThumb" controls playsinline
+                   ${p.video.poster ? `poster="${p.video.poster}"` : ""}
+                   style="width:100%;max-height:360px;object-fit:cover;border-radius:12px;border:1px solid color-mix(in hsl, var(--text) 10%, transparent)"
+                   src="${p.video.src}"></video>`)
+      : `<img id="modalThumb" alt="${p.title} image"
+              style="width:100%;max-height:360px;object-fit:cover;border-radius:12px;border:1px solid color-mix(in hsl, var(--text) 10%, transparent)"
+              src="${p.thumbSVG || svgThumb(p.title)}">`);
+
+    $("modalThumb").outerHTML = mediaHtml;
+
+    $("modalDesc").textContent = p.desc || "";
+    $("modalTags").innerHTML = (p.tags || []).map(t=>`<span class='tag'>${t}</span>`).join('');
+    $("modalLinks").innerHTML = (p.links || []).map(l=>`<a href='${l.href}' target='_blank' rel='noopener noreferrer'>${l.label} ↗</a>`).join(' ');
+
+    // Inject long-form rich HTML if provided (images, sections, extra videos, etc.)
+    $("modalRich").innerHTML = p.body || "";
+
+    document.getElementById('projectModal').showModal();
+  }
+  function closeModal(){ document.getElementById('projectModal').close(); }
+
+  const STORAGE_KEY = 'portfolio-theme';
+  function setTheme(mode){ document.documentElement.dataset.theme = mode; localStorage.setItem(STORAGE_KEY, mode); }
+  function initTheme(){ const saved = localStorage.getItem(STORAGE_KEY); if(saved) setTheme(saved); }
+
+  renderProfile();
+  renderGrid(PROJECTS);
+  initTheme();
+
+  $("search").addEventListener('input', applyFilters);
+  $("darkToggle").addEventListener('click', ()=>{
+    const next = (localStorage.getItem(STORAGE_KEY) === 'light') ? 'dark' : 'light';
+    setTheme(next);
+    document.getElementById('darkToggle').setAttribute('aria-pressed', String(next==='dark'));
+    document.getElementById('darkToggle').textContent = next==='dark' ? '🌒' : '🌤️';
+  });
+
+  // HAMBURGER MENU TOGGLE
+const menuBtn = document.getElementById('menuBtn');
+const navlinks = document.getElementById('navlinks');
+
+menuBtn?.addEventListener('click', () => {
+  document.body.classList.toggle('menu-open');
+  const open = document.body.classList.contains('menu-open');
+  menuBtn.setAttribute('aria-expanded', String(open));
+});
+
+// close the menu when a link or the dark button is tapped
+navlinks?.addEventListener('click', (e) => {
+  if (e.target.closest('a,button')) {
+    document.body.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// optional: close on Esc and when resizing up to desktop
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.body.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+});
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 700) {
+    document.body.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+
+  const jsonLd = {"@context":"https://schema.org","@type":"Person","name":PROFILE.name,"jobTitle":"Mechanical Engineer","email":PROFILE.email,"url":location.href,"sameAs":[PROFILE.github,PROFILE.linkedin].filter(Boolean)};
+  const script = document.createElement('script'); script.type='application/ld+json'; script.textContent = JSON.stringify(jsonLd); document.head.appendChild(script);
+  </script>
+</body>
+</html>
