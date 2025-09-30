@@ -94,7 +94,14 @@
     .project-card p.muted{ text-align:left; }
     .project-card .project-links{ justify-content: center; width: 100%; }
     .project-card .details-btn{ display: block;width: 100%;align-self: stretch;   /* overrides your align-self:center */text-align: center;padding: 12px 18px;    /* a bit taller/longer */border-radius: 12px; }
-    .project-thumb{aspect-ratio:16/9;border-radius:12px;background:linear-gradient(135deg, color-mix(in hsl, var(--brand) 35%, var(--surface)), var(--surface-2));display:grid;place-items:center;border:1px solid color-mix(in hsl, var(--text) 10%, transparent)}
+    .project-thumb{
+  /* no fixed aspect, let media size naturally */
+  border-radius:12px;
+  background:linear-gradient(135deg, color-mix(in hsl, var(--brand) 35%, var(--surface)), var(--surface-2));
+  display:block;
+  border:1px solid color-mix(in hsl, var(--text) 10%, transparent);
+}
+
   
         /* desktop: show links inline; hide hamburger */
     .menu-btn{ display:none; }
@@ -174,25 +181,24 @@ select {
   max-width: 100%; height: auto; display: block;
 }
 /* --- Smaller, responsive project thumbnails (card grid only) --- */
-/* --- Show the whole image, scaled down (no crop) in the project grid --- */
-.project-card .project-thumb{
-  border-radius:12px;
-  overflow:hidden;
-}
+
+/* Grid thumbnails: show FULL image, scale down, never crop */
+.project-card .project-thumb{ aspect-ratio:auto !important; }
+
 .project-card .project-thumb img,
 .project-card .project-thumb video{
   width:100%;
-  height:auto !important;        /* kill tall thumbs */
-  object-fit:contain !important; /* show full image; letterbox if needed */
+  height:auto !important;         /* keep proportions */
+  object-fit:contain !important;  /* show whole image; letterbox if needed */
   display:block;
   border-radius:12px;
 }
 
-/* optional: cap super tall images on small phones */
+/* Optional: keep thumbs reasonable on very small phones */
 @media (max-width:700px){
   .project-card .project-thumb img,
   .project-card .project-thumb video{
-    max-height:260px;
+    max-height: clamp(160px, 45vw, 280px);
   }
 }
 
@@ -1204,8 +1210,8 @@ impact, and creativity in a way that truly makes a difference.
     const img = document.createElement('img');
     img.alt = `${title} preview`;
     img.src = svgThumb(title);
-    img.style.width = 'auto';
-    img.style.height = '100%';
+    img.style.width = '100%';
+    img.style.height = 'auto%';
     img.style.objectFit = 'contain';
     img.style.borderRadius = '12px';
     img.style.border = '1px solid color-mix(in hsl, var(--text) 10%, transparent)';
@@ -1238,7 +1244,6 @@ impact, and creativity in a way that truly makes a difference.
        loading="lazy" decoding="async"
        style="width:100%;height:auto;border-radius:12px;display:block"
        src="${p.thumbSVG}">`
-
           : thumbEl(p.title)
       }</div>
       <div class="spaced">
