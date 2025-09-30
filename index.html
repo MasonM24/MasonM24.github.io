@@ -173,6 +173,24 @@ select {
 .project-card img, .project-card video, .project-card iframe {
   max-width: 100%; height: auto; display: block;
 }
+/* --- Smaller, responsive project thumbnails (card grid only) --- */
+.project-card .project-thumb{
+  /* pick a compact, responsive height */
+  height: clamp(120px, 28vw, 180px);
+  aspect-ratio: auto;            /* height rules; don't force 16:9 here */
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* ensure media fits the smaller box cleanly */
+.project-card .project-thumb img,
+.project-card .project-thumb video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;              /* crop instead of stretching */
+  border-radius: 12px;
+}
 
 /* Modal: inherit theme colors explicitly */
 #projectModal { 
@@ -727,11 +745,29 @@ impact, and creativity in a way that truly makes a difference.
           <div class="gallery">
             <h4> Testing Relay Trigger Control Video 1  </h4>
             <div></div>
-          <video controls playsinline src="Turret - Electronic Trig Test.MOV"></video>
+          <div class="video-embed">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/jQDlAlHVQlQ?rel=0&modestbranding=1&playsinline=1"
+    title="YouTube video"
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+
            <div></div>
           <h4> Testing Relay Trigger Control Video 2  </h4>
             <div></div>
-          <video controls playsinline src="Turret - Relay Demo.MP4"></video>
+          <div class="video-embed">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/WlkzIissjSA?rel=0&modestbranding=1&playsinline=1"
+    title="YouTube video"
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+
           </div>
 
 
@@ -791,7 +827,16 @@ impact, and creativity in a way that truly makes a difference.
             <div></div>
             <h4> Ammunition Feeding System Test  </h4>
             <div></div>
-            <video controls playsinline src="Turret - Ammunition Feeding Demo.MP4"></video>
+            <div class="video-embed">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/9jS-gGAgDYU?rel=0&modestbranding=1&playsinline=1"
+    title="YouTube video"
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+
 
           </div>
 
