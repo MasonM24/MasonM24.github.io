@@ -158,6 +158,21 @@ select {
 
 /* Details button background already uses vars via .chip; ensure hover keeps contrast */
 .details-btn:hover { color: var(--text); }
+/* --- Mobile stability for project cards --- */
+#projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* robust wrapping */
+  gap: 16px;
+}
+
+/* prevent overflow in grid items on narrow screens */
+.project-card { min-width: 0; }
+.project-card .spaced, .project-card p { min-width: 0; overflow-wrap: anywhere; }
+
+/* make sure media never overflows its card */
+.project-card img, .project-card video, .project-card iframe {
+  max-width: 100%; height: auto; display: block;
+}
 
 /* Modal: inherit theme colors explicitly */
 #projectModal { 
@@ -686,7 +701,16 @@ impact, and creativity in a way that truly makes a difference.
           <div></div>
           <h4> Stepper Motor Control Test  </h4>
             <div></div>
-          <video controls playsinline src="Turret - Stepper Control Test.MOV"></video>
+          <div class="video-embed">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/h3RrhEDp5eM?rel=0&modestbranding=1&playsinline=1"
+    title="YouTube Shorts"
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+
           <div></div>
           <h4> Horizontal Rotation Mechanism Test  </h4>
             <div></div>
