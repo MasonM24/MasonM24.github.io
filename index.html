@@ -23,6 +23,23 @@
     .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.3px}
     .logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;box-shadow:var(--shadow)}
     .logo svg{filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+    .video-embed{
+  position:relative;
+  padding-bottom:56.25%; /* 16:9 */
+  height:0;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid color-mix(in hsl, var(--text) 10%, transparent);
+  margin: 8px 0 16px; /* optional spacing */
+}
+.video-embed iframe{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  border:0;
+}
+/* if you have a rule that forces #modalBody iframe {height:auto}, override it: */
+#modalBody .video-embed iframe{ height:100% !important; }
+
     .navlinks{display:flex;gap:18px;flex-wrap:wrap}
     .avatar{
   width:176px; height:176px; border-radius:999px;
@@ -422,28 +439,22 @@ impact, and creativity in a way that truly makes a difference.
             <div></div>
           <img src="Side Profile Turret V1.png" alt="CAD v1">
            <div></div>
-          <h4> V1 Prototype Operational Demo</h4>
-            <div></div>
-    <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;border:1px solid color-mix(in hsl, var(--text) 10%, transparent)">
+          <h4>V1 Prototype Operational Demo</h4>
+<div class="video-embed">
   <iframe
-    src="https://www.youtube-nocookie.com/embed/Lge5mW-jyek?rel=0&modestbranding=1"
-    title="YouTube video"
+    src="https://www.youtube-nocookie.com/embed/Lge5mW-jyek?rel=0&modestbranding=1&playsinline=1"
+    title="V1 Prototype Operational Demo"
     loading="lazy"
-    style="position:absolute;inset:0;width:100%;height:100%;border:0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen></iframe>
 </div>
 
-
-          <div></div>
-          <h4> V1 Prototype Computer Control Demo</h4>
-            <div></div>
-          <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;border:1px solid color-mix(in hsl, var(--text) 10%, transparent)">
+<h4>V1 Prototype Computer Control Demo</h4>
+<div class="video-embed">
   <iframe
     src="https://www.youtube-nocookie.com/embed/JoXO-t6yhc0?rel=0&modestbranding=1&playsinline=1"
-    title="YouTube video"
+    title="V1 Prototype Computer Control Demo"
     loading="lazy"
-    style="position:absolute;inset:0;width:100%;height:100%;border:0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen></iframe>
 </div>
