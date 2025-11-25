@@ -450,17 +450,48 @@ impact, and creativity in a way that truly makes a difference.
       heroImage: "mr_bones_back_cover_image.png",   // ← ADD THIS LINE
       
       body: `
-      <h3>The Motivation Behind Mr.Bones</h3>
-      <p> After completing GUNTHER, my roommate and I wanted another project that would challenge us and still provide a comical result. 
-        It was September 28th at the time, and with Halloween close enough we decided we wanted to create something in theme. 
-        That's when Mr. Bones was born, the idea to create a skeleton who would look around and converse with anybody on Halloween.</p>
+     <h3>Mechanical Design Process</h3>
 
-      <h3> Mechanical Design Process </p>  
-      <p> In terms of mechanical design, Mr.Bones had three distinct design stages:</p>
-      
-      <p> 1.)  </>
-      <p> 2.) </>
-      <p> 3.) </>
+      <p>
+        The mechanical architecture of <strong>Mr. Bones</strong> was developed through 
+        three major design stages, each focused on integrating an 
+        electromechanical system within the compact constraints of Mr.Bones' skull.
+      </p>
+
+      <ol>
+        <li><strong>LCD Integration in the Skull:</strong> 
+          
+    <p> During this stage, I needed to modify an anatomically accurate skull to house two LCD screens and the rounded lenses required for the realistic “moving eyes” effect. Although this sounds like a 
+    typical SolidWorks part-modification workflow, the challenge was that the skull was provided as an STL file, essentially a dense polygon mesh. STL files are extremely difficult to work with in a 
+    parametric CAD environment because they do not import as clean solids and offer no reliable faces or features to reference when designing mating geometry.</p>
+
+    <p> To overcome this, I leveraged a workflow that combined SolidWorks for precise parametric modeling and Blender for mesh-based modifications.
+    I first created the LCD and lens mounting geometry in SolidWorks, then generated “negative” bodies of these features. These negatives were imported into Blender, positioned accurately inside the STL skull model, 
+    and boolean-subtracted from it. This hybrid approach allowed me to bypass the limitations of STL editing in SolidWorks while still maintaining engineering-grade accuracy for the components that needed to fit 
+    perfectly. The images and videos below capture some aspects of this design stage.</p>
+          
+
+
+    <div class="gallery">
+         
+          <h4> Early V2 Prototype Design</h4>
+          <div></div>
+          <img src="mr_bones_Front_Face_eye_Shot.jpg" alt="CAD v1">
+          <div></div>
+
+          
+
+
+
+          
+          .</li>
+
+        <li><strong>Jaw Mechanism Design:</strong> Creating a reliable, servo-driven jaw linkage with 
+            controlled motion, proper hinging, and minimal backlash.</li>
+
+        <li><strong>Neck Actuation System:</strong> Developing a two-axis neck mechanism for head rotation 
+            and tilt, ensuring smooth motion and compatibility with the skull assembly.</li>
+      </ol>
         
         With this project having a short 4 week window in which a working model needed to be delivered, I started by addressing the design of the skull as I believed that was going to be the most time consuming part of the project mechanically.
           The first challange I encountered with the design of the skull was the fact that I needed to somehow create mounts for two LCD screens, 
