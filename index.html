@@ -534,13 +534,15 @@ impact, and creativity in a way that truly makes a difference.
 
 <br>
 
-<li><strong>Neck Actuation System:</strong>
-  <p>
-    Developing a two-axis neck mechanism for head rotation and tilt, ensuring smooth motion and compatibility with the skull assembly.
-  </p>
-</li>
+<li><strong>Neck Actuation System:</strong> 
+  <p> With the short timeline for this project, I needed to be efficient in how I approached the neck design. Drawing on experience from a previous robotic dog project, I adapted and refined 
+    its shoulder articulation mechanism to create a two-axis neck system capable of both rotation and tilt, enabling lifelike head movement. One key challenge was that my initial design relied 
+    on the output shaft of the rotational servo to support the entire weight of the head, which caused significant wobbling and would likely have led to servo damage due to excessive bending loads. 
+    To eliminate this issue, I integrated a heavy-duty bearing at the base of the neck to support the head’s weight and ensure the servo experienced only pure rotational torque. The images below illustrate 
+    this part of the design process. </p> </li>
 
 <!-- NECK IMAGE GALLERY -->
+
 <div class="gallery">
 
   <div class="gallery-item">
@@ -566,10 +568,52 @@ impact, and creativity in a way that truly makes a difference.
     allowfullscreen>
   </iframe>
 </div>
-
-
       </ol>
+
+
+<h3>Electrical Integration and Cable Routing</h3>
+<ol>
+  <li>
+    Wiring and cable routing is always one of the most satisfying parts of a build for me. It’s the stage where everything finally comes together, and you can clearly see how each subsystem connects. 
+    For Mr. Bones, I focused on keeping the wiring clean, organized, and easy to follow by grouping cables, applying sleeving, and routing everything with intention rather than letting it become a tangle. 
+    
+    With more time, I would have built a fully enclosed electronics box for the Raspberry Pi and servo controller, but the exposed wiring in the chest ended up fitting the project’s Halloween, 
+    animatronic aesthetic surprisingly well.
+  </li>
+
+
+
+  <!-- Electrical IMAGE GALLERY -->
+
+<div class="gallery">
+
+  <div class="gallery-item">
+    <h4>Cable Routing Throuh Back</h4>
+    <img src="mr_bones_back_electrical_wiring.jpg" alt="CAD v1">
+  </div>
+
+  <div class="gallery-item">
+    <h4>Cable Routing Around Neck</h4>
+    <img src="mr_bones_cable_routing_around_neck.jpg" alt="CAD v1">
+  </div>
+
+  <div class="gallery-item">
+    <h4>Cable Routing Through Chest</h4>
+    <img src="mr_bones_full_frontal_electrical.jpg" alt="CAD v1">
+  </div>
+
+</div>
+
+
+
+</ol>
+
+
+
+       
         
+
+
        
 
 
